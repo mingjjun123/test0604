@@ -1,11 +1,456 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PORTFOLIO | 2401110072 김준서</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #0f0f0f;
+      color: #f2f2f2;
+      overflow-x: hidden;
+      word-break: keep-all;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      padding: 0 7vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(15, 15, 15, 0.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      font-size: 14px;
+      color: #bdbdbd;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    section {
+      padding: 110px 7vw;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 7vw 90px;
+    }
+
+    .hero h1 {
+      font-size: clamp(64px, 13vw, 180px);
+      line-height: 0.88;
+      letter-spacing: -0.075em;
+      font-weight: 900;
+      margin-bottom: 28px;
+    }
+
+    .hero p {
+      font-size: clamp(18px, 2vw, 28px);
+      line-height: 1.55;
+      letter-spacing: -0.04em;
+      color: #cfcfcf;
+      font-weight: 400;
+    }
+
+    .section-title {
+      font-size: 16px;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+      margin-bottom: 34px;
+      color: #9b9b9b;
+    }
+
+    .about-text {
+      max-width: 900px;
+      font-size: clamp(24px, 4vw, 52px);
+      line-height: 1.38;
+      letter-spacing: -0.065em;
+      font-weight: 800;
+    }
+
+    .about-text span {
+      color: #ffffff;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .skill-card {
+      min-height: 220px;
+      padding: 30px;
+      border-radius: 26px;
+      background: #1b1b1b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .skill-icon {
+      font-size: 34px;
+      margin-bottom: 42px;
+    }
+
+    .skill-card h3 {
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: -0.045em;
+      margin-bottom: 14px;
+    }
+
+    .skill-card p {
+      font-size: 15px;
+      line-height: 1.75;
+      letter-spacing: -0.03em;
+      color: #b8b8b8;
+    }
+
+    .works-wrap {
+      position: relative;
+    }
+
+    .works {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 18px;
+    }
+
+    .works::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .works::-webkit-scrollbar-thumb {
+      background: #444;
+      border-radius: 20px;
+    }
+
+    .work-card {
+      flex: 0 0 310px;
+      height: 420px;
+      padding: 28px;
+      border-radius: 30px;
+      background: #1c1c1c;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.25s;
+    }
+
+    .work-card:hover {
+      transform: translateY(-8px);
+      background: #242424;
+    }
+
+    .work-icon {
+      width: 100%;
+      height: 190px;
+      border-radius: 24px;
+      background: #f2f2f2;
+      color: #0f0f0f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 54px;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      margin-bottom: 26px;
+    }
+
+    .work-card h3 {
+      font-size: 24px;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+    }
+
+    .work-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      letter-spacing: -0.03em;
+      color: #b8b8b8;
+    }
+
+    .view {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .slide-control {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #a9a9a9;
+      font-size: 14px;
+    }
+
+    .arrow-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: none;
+      background: #f2f2f2;
+      color: #0f0f0f;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .contact-text {
+      max-width: 760px;
+      font-size: clamp(32px, 6vw, 86px);
+      line-height: 1.02;
+      letter-spacing: -0.075em;
+      font-weight: 900;
+      margin-bottom: 36px;
+    }
+
+    .email {
+      display: inline-block;
+      font-size: 20px;
+      line-height: 1.5;
+      letter-spacing: -0.035em;
+      color: #cfcfcf;
+      border-bottom: 1px solid #cfcfcf;
+      padding-bottom: 6px;
+    }
+
+    footer {
+      padding: 40px 7vw;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      color: #8d8d8d;
+      font-size: 13px;
+      letter-spacing: -0.02em;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        padding: 0 5vw;
+      }
+
+      nav {
+        display: none;
+      }
+
+      section {
+        padding: 80px 5vw;
+      }
+
+      .hero {
+        padding: 120px 5vw 70px;
+      }
+
+      .skills {
+        grid-template-columns: 1fr;
+      }
+
+      .work-card {
+        flex-basis: 260px;
+        height: 380px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    
+  <header>
+    <a href="#home" class="logo">PORTFOLIO</a>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#works">Works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="home" class="hero">
+    <h1>
+      Kim<br>
+      Junseo
+    </h1>
+    <p>
+      2401110072<br>
+      Visual & Interaction Design
+    </p>
+  </main>
+
+  <section id="about">
+    <div class="section-title">ABOUT</div>
+
+    <p class="about-text">
+      보여지는 것만큼이나 그 안에 담긴 내용이 잘 전달되는지가 중요하다고 생각합니다.
+      그래서 저는 디자인을 할 때 <span>꾸밈보다 정돈</span>에 더 집중합니다.
+      보는 사람이 편안하게 읽고 이해할 수 있는 화면을 만드는 것이 저의 작업 방식입니다.
+    </p>
+  </section>
+
+  <section id="skills">
+    <div class="section-title">SKILLS</div>
+
+    <div class="skills">
+      <div class="skill-card">
+        <div class="skill-icon">▦</div>
+        <h3>Architecture<br>Design & Layout</h3>
+        <p>
+          Figma를 활용해 화면 구조와 정보 배치를 정리하고,
+          사용자가 자연스럽게 읽을 수 있는 레이아웃을 구성합니다.
+        </p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">▧</div>
+        <h3>Photo<br>Image Editing</h3>
+        <p>
+          Photoshop과 Illustrator를 활용해 이미지 보정,
+          그래픽 요소 제작, 시각 자료 구성을 진행합니다.
+        </p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">▶</div>
+        <h3>Motion<br>Video Production</h3>
+        <p>
+          Premiere와 After Effects를 활용해 영상 편집과
+          간단한 모션그래픽 작업을 제작합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="section-title">WORKS</div>
+
+    <div class="works-wrap">
+      <div class="works" id="workSlider">
+        <div class="work-card">
+          <div>
+            <div class="work-icon">01</div>
+            <h3>Project 01</h3>
+            <p>Typography and layout based visual design work.</p>
+          </div>
+          <div class="view">View Detail</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <div class="work-icon">02</div>
+            <h3>Project 02</h3>
+            <p>Web interaction page using HTML and CSS.</p>
+          </div>
+          <div class="view">View Detail</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <div class="work-icon">03</div>
+            <h3>Project 03</h3>
+            <p>UI design practice focused on clean information flow.</p>
+          </div>
+          <div class="view">View Detail</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <div class="work-icon">04</div>
+            <h3>Project 04</h3>
+            <p>Graphic design work with simple visual concept.</p>
+          </div>
+          <div class="view">View Detail</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <div class="work-icon">05</div>
+            <h3>Project 05</h3>
+            <p>Portfolio page designed with spacing and rhythm.</p>
+          </div>
+          <div class="view">View Detail</div>
+        </div>
+      </div>
+
+      <div class="slide-control">
+        <button class="arrow-btn" onclick="slideWorks(-1)">‹</button>
+        <span>Swipe left/right or use buttons</span>
+        <button class="arrow-btn" onclick="slideWorks(1)">›</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title">CONTACT</div>
+
+    <div class="contact-text">
+      Let’s Work<br>
+      Together
+    </div>
+
+    <a class="email" href="mailto:2401110072@gspace.kopo.ac.kr">
+      2401110072@gspace.kopo.ac.kr
+    </a>
+  </section>
+
+  <footer>
+    <p>© Kim Junseo. All rights reserved.</p>
+    <p>Email · LinkedIn · Behance</p>
+  </footer>
+
+  <script>
+    function slideWorks(direction) {
+      const slider = document.getElementById("workSlider");
+      slider.scrollBy({
+        left: direction * 340,
+        behavior: "smooth"
+      });
+    }
+  </script>
 </body>
 </html>
